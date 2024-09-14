@@ -1,0 +1,191 @@
+/* Reseta margens e preenchimentos */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos gerais para o corpo e fundo */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    padding: 15px;  /* Adiciona espaçamento nas bordas da tela */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('Screenshot_20240910-230248_Instagram.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    max-width: 450px;  /* Limita a largura máxima */
+    padding: 15px;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    max-width: 450px;
+    height: 400px;
+    perspective: 1000px;
+    position: relative;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg); /* Estado inicial */
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Frente e verso do card */
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.flip-card-front {
+    background-color: rgb(255, 255, 255);
+}
+
+.flip-card-back {
+    background-color: #363636;
+    transform: rotateY(180deg);
+}
+
+/* Ajuste da foto para ficar metade fora do card */
+.pet-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: -50px; /* Move a imagem para fora pela metade da altura */
+    left: calc(50% - 50px); /* Centraliza a imagem horizontalmente */
+    border: 4px solid white; /* Adiciona uma borda branca para dar destaque */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra à foto */
+    z-index: 2; /* Garante que a foto esteja sobre o card */
+}
+
+.about-pet,
+.owner-info {
+    text-align: left;
+    margin-top: 60px; /* Adiciona espaço para a foto que está fora do card */
+}
+
+/* Foto do dono no verso do card, que começa oculta */
+.owner-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: -50px; /* Move a imagem para fora pela metade da altura */
+    left: calc(50% - 50px); /* Centraliza a imagem horizontalmente */
+    border: 4px solid white; /* Adiciona uma borda branca */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra */
+    z-index: 2; /* Garante que a foto esteja sobre o card */
+}
+
+/* Estilos para esconder/mostrar as informações */
+.hidden {
+    display: none;
+}
+
+button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #9b9b9b;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3e3f3f;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 10px;
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+li {
+    margin-bottom: 2px;
+    text-align: left;
+}
+
+.flip-card-back li {
+    color: #ffff;
+}
+
+.flip-card-back h3 {
+    color: #ffffff;
+}
+
+.flip-card-front li {
+    color: #585858;
+}
+
+.flip-card-front li strong {
+    color: rgb(179, 142, 95);
+}
+
+.about-pet h3 {
+    color: rgb(179, 142, 95);
+}
+
+/* Responsividade para telas menores */
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 10px; /* Ajusta o espaçamento nas bordas em telas menores */
+    }
+
+    .flip-card {
+        height: 350px; /* Ajusta a altura para telas menores */
+    }
+}

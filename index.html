@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio do Cachorro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <!-- Frente do card -->
+                <div class="flip-card-front">
+                    <div class="pet-profile">
+                        <div class="profile-header">
+                            <img src="Screenshot_20240910-230248_Instagram.jpg" alt="Foto do Cachorro" class="pet-photo">
+                            <div class="about-pet">
+                                <h3>Sobre o pet</h3>
+                                <p>Um cachorro muito animado e adora estar ao ar livre. Meu dono cuida muito bem de mim.</p>
+                            </div>
+                        </div>
+                        <div class="pet-info">
+                            <ul>
+                                <li><strong>Nome/Apelido:</strong> Sol</li>
+                                <li><strong>Idade do Cão:</strong> 6 anos</li>
+                                <li><strong>Raça:</strong> Box com vira-lata</li>
+                                <li><strong>Sexo:</strong> Fêmea</li>
+                                <li><strong>Vacinação em Dia:</strong> Sim</li>
+                                <li><strong>Vacina mais recente:</strong> Vacina antirrábica (Raiva)</li>
+                                <li><strong>Coisas que Gosta:</strong> Correr, brincar com bola e destruir coisas</li>
+                                <li><strong>Coisas que Não Gosta:</strong> Banho, veterinário</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Verso do card -->
+                <div class="flip-card-back">
+                    <div class="owner-info">
+                        <img src="20240914_161951.jpg" alt="Foto do Dono" class="owner-photo hidden"> <!-- Foto do Dono -->
+                        <h3>Dono do Pet</h3>
+                        <button id="toggleInfoBtn">Mostrar informações do dono</button>
+                        <ul id="ownerDetails" class="hidden">
+                            <li><i class="fa-solid fa-user" style="color: #74C0FC;"></i><strong></strong> Gabriel André Rodrigues</li>
+                            <li><strong><i class="fa-solid fa-envelope" style="color: #e39191;"></i></strong> gabrielandreerodrigues@gmail.com</li>
+                            <li><strong><i class="fa-brands fa-whatsapp" style="color: #63E6BE;"></i></strong> (31) 985080955</li>
+                            <li><i class="fa-brands fa-instagram" style="color: #74C0FC;"></i> gabrielhjs</li>
+                            <li><i class="fa-solid fa-location-dot" style="color: #B197FC;"></i> Minas Gerais/Conselheiro Lafaiete</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const flipCardInner = document.querySelector('.flip-card-inner');
+        const toggleInfoBtn = document.getElementById('toggleInfoBtn');
+        const ownerDetails = document.getElementById('ownerDetails');
+        const ownerPhoto = document.querySelector('.owner-photo');
+    
+        let isFlipped = false; // Variável para controlar o estado de rotação
+    
+        // Função para alternar a rotação do card
+        function toggleCard() {
+            if (isFlipped) {
+                ownerDetails.classList.add('hidden');
+                ownerPhoto.classList.add('hidden');  // Esconder a foto do dono
+                toggleInfoBtn.textContent = 'Mostrar informações do dono';
+                flipCardInner.style.transform = 'rotateY(0deg)';
+            } else {
+                ownerDetails.classList.remove('hidden');
+                ownerPhoto.classList.remove('hidden');  // Mostrar a foto do dono
+                toggleInfoBtn.textContent = 'Esconder informações do dono';
+                flipCardInner.style.transform = 'rotateY(180deg)';
+            }
+            isFlipped = !isFlipped; // Alternar o estado de rotação
+        }
+    
+        // Adiciona evento de clique ao container para girar o card
+        document.querySelector('.flip-card').addEventListener('click', toggleCard);
+    
+        // Adiciona evento de clique ao botão para mostrar/ocultar informações
+        toggleInfoBtn.addEventListener('click', function() {
+            // Apenas muda o texto do botão e as informações do dono, sem alterar a rotação
+            if (ownerDetails.classList.contains('hidden')) {
+                ownerDetails.classList.remove('hidden');
+                ownerPhoto.classList.remove('hidden');
+                toggleInfoBtn.textContent = 'Esconder informações do dono';
+            } else {
+                ownerDetails.classList.add('hidden');
+                ownerPhoto.classList.add('hidden');
+                toggleInfoBtn.textContent = 'Mostrar informações do dono';
+            }
+        });
+    </script>
+    
+    </script>
+</body>
+</html>
